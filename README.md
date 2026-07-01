@@ -38,8 +38,3 @@ npm run dev
 
 The server will start on http://localhost:3000
 
-## Testing
-
-Make requests to see the custom middleware logs in the terminal:
-```bash
-node test-all.js
