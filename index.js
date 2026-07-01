@@ -68,6 +68,21 @@ const server = app.listen(PORT, '0.0.0.0', () => {
     console.log('Keep this terminal open to see request logs.');
 });
 
+// Error handling
+server.on('error', (e) => {
+    if (e.code === 'EADDRINUSE') {
+        console.error(`Error: Port ${PORT} is already in use`);
+    } else {
+        console.error('Server error:', e);
+    }
+    process.exit(1);
+});
+
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught exception:', err);
+    process.exit(1);
+});
+
 process.on('SIGINT', () => {
     console.log('Shutting down server...');
     server.close(() => process.exit(0));
